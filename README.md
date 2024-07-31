@@ -31,5 +31,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+The `AddRuntimeWebBundler` method adds a `IHostedService` that starts watching any modification at source files inside the projects directories where exists a configuration file. 
+
 ## License
 [Apache 2.0](LICENSE)

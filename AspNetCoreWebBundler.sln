@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebBundler", "src\AspNetCoreWebBundler\AspNetCoreWebBundler.csproj", "{90B18DF7-26E3-4BE6-972B-D7C33CB9951F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{178D0A14-27F7-4511-92EE-F7324DFE3809}"
+	ProjectSection(SolutionItems) = preProject
+		common.props = common.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreWebBundler.Test", "src\AspNetCoreWebBundler.Test\AspNetCoreWebBundler.Test.csproj", "{1B513272-00A3-4C0C-A679-B499A1036C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90B18DF7-26E3-4BE6-972B-D7C33CB9951F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90B18DF7-26E3-4BE6-972B-D7C33CB9951F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90B18DF7-26E3-4BE6-972B-D7C33CB9951F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90B18DF7-26E3-4BE6-972B-D7C33CB9951F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B513272-00A3-4C0C-A679-B499A1036C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B513272-00A3-4C0C-A679-B499A1036C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B513272-00A3-4C0C-A679-B499A1036C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B513272-00A3-4C0C-A679-B499A1036C3C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4AA9175A-5E31-4996-B0D9-6AABA7A324D2}
+	EndGlobalSection
+EndGlobal

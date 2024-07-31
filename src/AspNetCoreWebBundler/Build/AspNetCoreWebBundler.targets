@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_AspNetCoreWebBundlerTaskAssembly>..\tools\netstandard2.0\AspNetCoreWebBundler.dll</_AspNetCoreWebBundlerTaskAssembly>
+    <_RuntimeWebBundlerSettingsFile>$(IntermediateOutputPath)$(MSBuildProjectName).RuntimeWebBundlerSettings.generated.cs</_RuntimeWebBundlerSettingsFile>
+  </PropertyGroup>
+
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.WebBundlerBuildTask"/>
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.WebBundlerCleanTask"/>
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.RuntimeWebBundlerSettingsCleanTask"/>
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.RuntimeWebBundlerSettingsTask"/>
+
+   <!-- clean the bundles -->
+  <Target Name="AspNetCoreWebBundlerClean" AfterTargets="CoreClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True'">
+    <AspNetCoreWebBundler.WebBundlerCleanTask ConfigurationFile="$(MSBuildProjectDirectory)\AspNetCoreWebBundler.json" />
+  </Target>
+
+  <!-- build the bundles -->
+  <Target Name="AspNetCoreWebBundlerBuild" AfterTargets="CompileTypeScriptWithTSConfig" BeforeTargets="BeforeCompile" Condition="'$(EnableAspNetCoreWebBundler)' == 'True'">
+    <AspNetCoreWebBundler.WebBundlerBuildTask ConfigurationFile="$(MSBuildProjectDirectory)\AspNetCoreWebBundler.json" />
+  </Target>
+
+
+  <!-- clean the runtime settings -->
+  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettingsClean" AfterTargets="CoreClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' ">
+    <AspNetCoreWebBundler.RuntimeWebBundlerSettingsCleanTask OutputFile="$(_RuntimeWebBundlerSettingsFile)" />
+  </Target>
+
+  <!-- build the runtime settings -->
+  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettings" BeforeTargets="BeforeCompile" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' ">
+    <AspNetCoreWebBundler.RuntimeWebBundlerSettingsTask OutputFile="$(_RuntimeWebBundlerSettingsFile)" SolutionPath="$(SolutionPath)" />
+    <ItemGroup>
+      <Compile Include="$(_RuntimeWebBundlerSettingsFile)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

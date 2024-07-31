@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AspNetCoreMinfier": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\Git\\Biologico\\AsterBio\\BIONIC"
+    }
+  }
+}

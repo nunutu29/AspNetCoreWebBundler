@@ -13,7 +13,7 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>concat;bundle;minify;uglify;compress;minification;css;js;html;aspnet;aspnetcore</PackageTags>
-    <PackageIconUrl></PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/nunutu29/AspNetCoreWebBundler/main/logo/logo128x128.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/nunutu29/AspNetCoreWebBundler/blob/main/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/nunutu29/AspNetCoreWebBundler</RepositoryUrl>

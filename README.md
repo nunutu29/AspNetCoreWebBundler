@@ -1,22 +1,26 @@
 # ASP.NET Core Web Bundler
 
-ASP.NET Core NuGet for bundling and minification of CSS, JavaScript and HTML files.
+A NuGet Package for CSS, JavaScript, and HTML Bundling and Minification
 
 ## Features
-- Bundles CSS, JavaScript or HTML files into a single/multiple output file/s.
-- Runtime bundle during `Debug` mode.
+- Combine CSS, JavaScript, and HTML files into one or more output files.
+- Minify one or multiple files into one or more output files
+- Bundle files at build time using MSBuild Tasks.
+- Automatically bundle files during `Debug` mode
 
 ## Setup
 Add the NuGet package.
-This package is primarly needed at compilation time, so one should set `PrivateAssets="All"` to avoid populating the bin folder with this package during publish.
+
+Since this package is primarily required at compilation time, set PrivateAssets="All" in the package reference. This ensures that the package does not get included in the output during the publishing process, keeping the bin folder clean.
 
 ```xml
 <ItemGroup>
-    <PackageReference Include="AspNetCoreWebBundler" Version="<version number>" PrivateAssets="All" />
+    <PackageReference Include="AspNetCoreWebBundler" Version="x.y.z" PrivateAssets="All" />
 </ItemGroup>
 ```
 
-If you want to add the runtime support during debug, modify the *ConfigureServices* method:
+To enable runtime bundling support during debug mode, you need to modify the *ConfigureServices* method. 
+Here's an example of how you can set it up:
 
 ```csharp
 using AspNetCoreWebBundler;
@@ -25,13 +29,22 @@ using AspNetCoreWebBundler;
 public void ConfigureServices(IServiceCollection services)
 {
 #if DEBUG
+     // Add runtime bundling services only during Debug mode
     services.AddRuntimeWebBundler();
 #endif
-    // other code 
+    // Other service configurations...
 }
 ```
 
-The `AddRuntimeWebBundler` method adds a `IHostedService` that starts watching any modification at source files inside the projects directories where exists a configuration file. 
+`AddRuntimeWebBundler`: This method sets up an `IHostedService` that watches for changes in the source files (CSS, JavaScript and HTML) within the solution directories. 
+It specifically monitors projects directories within the solution containing configuration files.
+
+To disable the bundling/minification process, you can include the following property in your .csproj file:
+```xml
+<PropertyGroup>
+  <EnableAspNetCoreWebBundler>false</EnableAspNetCoreWebBundler>
+</PropertyGroup>
+```
 
 ## License
 [Apache 2.0](LICENSE)

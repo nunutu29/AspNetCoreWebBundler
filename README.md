@@ -78,7 +78,13 @@ Minification options for the output type.
 
 Other options differ depending on the type of input files (JavaScript, CSS or HTML).
 #### JavaScript
-TODO
+- `termSemicolons` - Add a semicolon at the end of the parsed code. Defaults to `false`.
+- `alwaysEscapeNonAscii` - Always escape non-ASCII characters as \uXXXX or to let the output encoding object handle that via the JsEncoderFallback object for the specified output encoding format. Default is `false` (let the Encoding object handle it).
+- `preserveImportantComments` - Remove all comments except those marked as important. Defaults to `true`.
+- `evalTreatment` - Settings for how to treat eval statements. Defaults to `ignore`.
+  - `ignore` - Ignore all eval statements (default). This assumes that code that is eval'd will not attempt to access any local variables or functions, as those variables and function may be renamed.
+  - `makeImmediateSafe` - Assume any code that is eval'd will attempt to access local variables and functions declared in the same scope as the eval statement. This will turn off local variable and function renaming in any scope that contains an eval statement.
+  - `makeAllSafe` - Assume that any local variable or function in any accessible scope chain may be referenced by code that is eval'd. This will turn off local variable and function renaming for all scopes that contain an eval statement, and all their parent scopes up the chain to the global scope.
 
 #### CSS
 - `adjustRelativePaths` - Adjusts the paths based on the output file position. Defaults to `true`.

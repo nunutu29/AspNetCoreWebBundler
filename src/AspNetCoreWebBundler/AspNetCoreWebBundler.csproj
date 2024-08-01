@@ -1,13 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\common.props" />
-
   <PropertyGroup>    
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0</Version>
+    <RootNamespace>AspNetCoreWebBundler</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Title>ASP.NET Core Web Bundler</Title>
+    <Description>Bundles and minifies CSS, JS and HTML files in ASP.NET Core</Description>
+    <Authors>Ion Ursachi</Authors>
+    <Copyright>Copyright 2024</Copyright>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <!-- forces SDK to copy dependencies into build output to make packing easier -->
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>concat;bundle;minify;uglify;compress;minification;css;js;html;aspnet;aspnetcore</PackageTags>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/nunutu29/AspNetCoreWebBundler/blob/main/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/nunutu29/AspNetCoreWebBundler</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

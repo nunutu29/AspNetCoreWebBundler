@@ -19,6 +19,8 @@
     <RepositoryUrl>https://github.com/nunutu29/AspNetCoreWebBundler</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <!--required to keep external nugets inside tools folder-->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

@@ -115,12 +115,12 @@ Other options differ depending on the type of input files (JavaScript, CSS or HT
 - `indent` (`string`) - The string used for one level of indent. Default is two spaces.
 
 ### `sourceMap` (`bool`)
-If true, will generate a source map for the bundled file.
+If `true`, will generate a source map for the bundled file. Default is `false`.
 
 ### `sourceMapRootPath` (`string`)
-Source root URI that will be added to the map object as the sourceRoot property
+Source root URI that will be added to the map object as the sourceRoot property.
 
-# Development runtime
+# Development
 To enable runtime bundling support during development, you need to modify the *ConfigureServices* method.
 
 ```csharp

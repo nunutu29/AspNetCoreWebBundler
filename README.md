@@ -1,6 +1,6 @@
 # ASP.NET Core Web Bundler
 
-A NuGet Package for CSS, JavaScript, and HTML Bundling and Minification at build time and runtime during development.
+A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build time and runtime during development.
 
 # Features
 - Combine CSS, JavaScript, and HTML files into one or more output files.

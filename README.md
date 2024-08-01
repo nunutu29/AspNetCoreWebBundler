@@ -4,9 +4,9 @@ A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build
 
 # Features
 - Combine CSS, JavaScript, and HTML files into one or more output files.
-- Minify one or multiple files into one or more output files
+- Minify one or multiple files into one or more output files.
 - Bundle files at build time using MSBuild Tasks.
-- Automatically bundle files during `Debug` mode
+- Automatically bundle files during `Debug` mode. Check [here](#development).
 
 # Setup
 Add the NuGet package.

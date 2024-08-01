@@ -36,7 +36,7 @@ internal class BundleUglifierSettings() : Dictionary<string, object>(StringCompa
         var settings = new HtmlSettings
         {
             AttributesCaseSensitive = GetValue("attributesCaseSensitive", false),
-            TagsCaseSensitive = GetValue("tagsCaseSensitive", true),
+            TagsCaseSensitive = GetValue("tagsCaseSensitive", false),
             CollapseWhitespaces = GetValue("collapseWhitespaces", true),
             RemoveComments = GetValue("removeComments", true),
             RemoveAttributeQuotes = GetValue("removeAttributeQuotes", true),
@@ -47,7 +47,7 @@ internal class BundleUglifierSettings() : Dictionary<string, object>(StringCompa
             MinifyJs = GetValue("minifyJs", true),
             MinifyJsAttributes = GetValue("minifyJsAttributes", true),
             MinifyCss = GetValue("minifyCss", true),
-            MinifyCssAttributes = GetValue("minifyCssAttributes", false),
+            MinifyCssAttributes = GetValue("minifyCssAttributes", true),
             KeepOneSpaceWhenCollapsing = GetValue("keepOneSpaceWhenCollapsing", false),
             Indent = GetValue("indent", "  ")
         };

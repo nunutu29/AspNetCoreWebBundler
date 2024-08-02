@@ -45,8 +45,8 @@ jobs:
     # Build
     - name: Build
       run: |
-        dotnet build --configuration Release --no-restore /p:Version=$RELEASE_VERSION
+        dotnet build --configuration Release --no-restore -p:Version=$RELEASE_VERSION
       
     - name: Test
       run: |
-        dotnet test --no-build --verbosity normal
+        dotnet test --configuration Release --no-build

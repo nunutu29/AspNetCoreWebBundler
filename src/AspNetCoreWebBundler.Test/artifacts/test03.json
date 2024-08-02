@@ -1,0 +1,22 @@
+﻿[
+  {
+    "dest": "out/test03.js",
+    "src": [
+      "src/test-folder/"
+    ],
+    "minify": {
+      "enabled": false,
+      "gzip": true
+    }
+  },
+  {
+    "dest": "out/test03.2.min.js",
+    "src": [
+      "src/test-folder/"
+    ],
+    "minify": {
+      "enabled": true,
+      "gzip": true
+    }
+  }
+]

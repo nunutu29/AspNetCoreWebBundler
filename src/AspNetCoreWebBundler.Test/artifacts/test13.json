@@ -1,0 +1,16 @@
+﻿[
+	{
+		"dest": "out/test13.js",
+		"src": [
+			"src/globbing/**/*.js",
+			"!src/globbing/test.*.js"
+		]
+	},
+  {
+    "dest": "out/test13/**/*.js",
+    "src": [
+      "src/globbing/**/*.js",
+      "!src/globbing/test.*.js"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+﻿[
+	{
+		"dest": "out/encoding.js",
+		"src": [
+			"js/encoding/utf-with-bom.js",
+			"js/encoding/utf-without-bom.js"
+		],
+		"minify": {
+			"enabled": true
+		}
+	}
+]

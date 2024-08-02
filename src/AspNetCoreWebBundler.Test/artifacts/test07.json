@@ -1,0 +1,12 @@
+﻿[
+  {
+    "dest": "test7.min.js",
+    "src": [
+      "encoding.js",
+      "file1.js",
+      "file2.js",
+      "file3.js",
+      "minify.js"
+    ]
+  }
+]

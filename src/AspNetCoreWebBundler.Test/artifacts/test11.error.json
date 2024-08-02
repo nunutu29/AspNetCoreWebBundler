@@ -1,0 +1,11 @@
+﻿[
+	{
+		"dest": "error.css",
+		"src": [
+			"error.css"
+		],
+		"minify": {
+			"enabled": true
+		}
+	}
+]

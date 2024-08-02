@@ -1,0 +1,11 @@
+﻿[
+	{
+		"dest": "out/test02.js",
+		"src": [
+			"src/test-folder/"
+		],
+		"minify": {
+			"enabled": true
+		}
+	}
+]

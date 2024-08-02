@@ -1,0 +1,11 @@
+﻿[
+  {
+    "dest": "file3.min.js",
+    "src": [
+      "file3.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  }
+]

@@ -1,0 +1,22 @@
+﻿[
+  {
+    "dest": "out/test04.min.html",
+    "src": [
+      "src/file3.html"
+    ],
+    "minify": {
+      "enabled": true,
+      "removeComments": true
+    }
+  },
+  {
+    "dest": "out/test04.2.min.html",
+    "src": [
+      "src/file3.html"
+    ],
+    "minify": {
+      "enabled": true,
+      "removeComments": false
+    }
+  }
+]

@@ -1,0 +1,41 @@
+﻿[
+  {
+    "dest": "out/test01.js",
+    "src": [
+      "src/file1.js",
+      "src/file2.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": true
+  },
+  {
+    "dest": "out/test01.css",
+    "src": [
+      "src/file1.css",
+      "src/file2.css",
+      "src/file3.css"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "dest": "out/test01.html",
+    "src": [
+      "src/file1.html",
+      "src/file2.html"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "dest": "out/test01.minify.min.js",
+    "src": [
+      "src/minify.js"
+    ],
+    "sourceMap": true
+  }
+]

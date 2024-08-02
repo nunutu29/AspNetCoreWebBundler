@@ -1,0 +1,13 @@
+﻿[
+  {
+    "dest": "file4.min.html",
+    "src": [
+      "file4.html"
+    ],
+    "minify": {
+      "enabled": true,
+      "keepOneSpaceWhenCollapsing": true,
+      "removeAttributeQuotes": false
+    }
+  }
+]

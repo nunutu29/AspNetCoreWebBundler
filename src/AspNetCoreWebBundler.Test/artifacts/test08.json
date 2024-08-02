@@ -1,0 +1,8 @@
+﻿[
+  {
+    "dest": "test8.min.js",
+    "src": [
+      "file4.js"
+    ]
+  }
+]

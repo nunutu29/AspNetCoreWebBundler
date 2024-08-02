@@ -8,7 +8,8 @@ on:
     types: [published]
   
 env:
-  RELEASE_VERSION: ${{ github.ref_name }}
+  # must contain the version with v prefix
+  RELEASE_VERSION: ${{ github.ref_name#v }}
 
 jobs:
   build:

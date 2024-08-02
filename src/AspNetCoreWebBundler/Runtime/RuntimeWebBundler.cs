@@ -107,13 +107,13 @@ namespace AspNetCoreWebBundler
 
                         var fsw = new FileSystemWatcher(projectRoot);
 
-                        fsw.Changed += FilesChanged;
-                        fsw.Renamed += FilesChanged;
+                        fsw.Changed += FileChanged;
+                        fsw.Renamed += FileChanged;
 
                         fsw.IncludeSubdirectories = true;
                         fsw.NotifyFilter = NotifyFilters.Size | NotifyFilters.CreationTime | NotifyFilters.FileName;
                         fsw.EnableRaisingEvents = true;
-
+                        
                         _listeners.TryAdd(projectRoot, fsw);
 
                         _logger.LogDebug("Watching: {projectRoot}", projectRoot);
@@ -127,6 +127,12 @@ namespace AspNetCoreWebBundler
                 }
             }
 
+            // re-process just before the projects starts (one might change the source files at build time, but after the task bundle)
+            foreach (var configPath in _configPaths)
+            {
+                _queue.TryAdd(configPath, new QueueItem(configPath));
+            }
+
             return started;
         }
 
@@ -138,8 +144,8 @@ namespace AspNetCoreWebBundler
                 {
                     fsw.EnableRaisingEvents = false;
 
-                    fsw.Changed -= FilesChanged;
-                    fsw.Changed -= FilesChanged;
+                    fsw.Changed -= FileChanged;
+                    fsw.Changed -= FileChanged;
 
                     try
                     {
@@ -158,20 +164,28 @@ namespace AspNetCoreWebBundler
             }
         }
 
-        private void FilesChanged(object sender, FileSystemEventArgs e)
+        private void FileChanged(object sender, FileSystemEventArgs e)
         {
-            // _configPaths.Contains(e.FullPath) ||
-            if (IsFileValid(e.FullPath))
+            FileChangedCore((FileSystemWatcher)sender, e.FullPath);
+        }
+
+        private void FileChangedCore(FileSystemWatcher fsw, string fullPath)
+        {
+            if (_configPaths.Contains(fullPath))
             {
-                var fsw = (FileSystemWatcher)sender;
+                fsw.EnableRaisingEvents = false;
+                _queue.TryAdd(fullPath, new QueueItem(fullPath));
+            }
+            else if (IsFileValid(fullPath))
+            {
                 fsw.EnableRaisingEvents = false;
 
-                var root = _listeners.Keys.FirstOrDefault(path => e.FullPath.StartsWith(path, StringComparison.InvariantCultureIgnoreCase));
-                
+                var root = _listeners.Keys.FirstOrDefault(path => fullPath.StartsWith(path, StringComparison.InvariantCultureIgnoreCase));
+
                 if (root != null)
                 {
                     var configFile = _configPaths.FirstOrDefault(path => path.StartsWith(root, StringComparison.InvariantCultureIgnoreCase));
-                    _queue.TryAdd(e.FullPath, new QueueItem(configFile));
+                    _queue.TryAdd(fullPath, new QueueItem(configFile));
                 }
             }
         }
@@ -201,15 +215,22 @@ namespace AspNetCoreWebBundler
 
         private void TimerElapsed(object state)
         {
-
             try
             {
                 var items = _queue.Where(i => i.Value.Timestamp < DateTime.Now.AddMilliseconds(-250)).ToList();
                 
                 foreach (var item in items)
                 {
-                    // process
-                    _processor.ProcessBySourceFile(item.Value.ConfigFile, item.Key);
+                    if (item.Value.ConfigFile == item.Key)
+                    {
+                        // process when configuration file changed
+                        _processor.Process(item.Value.ConfigFile);
+                    }
+                    else
+                    { 
+                        // process by source file
+                        _processor.ProcessBySourceFile(item.Value.ConfigFile, item.Key);
+                    }
                     
                     // remove from the queue
                     _queue.TryRemove(item.Key, out _);

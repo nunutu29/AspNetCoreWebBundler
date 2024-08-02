@@ -154,10 +154,7 @@ namespace AspNetCoreWebBundler
                         var ext = Path.GetExtension(inputFile);
 
                         var allFiles = Directory.EnumerateFiles(searchDir, "*" + ext, SearchOption.AllDirectories)
-                            .Select(file => file
-                                .Replace(folder + Path.DirectorySeparatorChar, "")
-                                .Replace("\\", "/")
-                            );
+                            .Select(file => file.Replace(folder + Path.DirectorySeparatorChar, "").Replace("\\", "/"));
 
                         var files = Minimatcher.Filter(allFiles, inputFile, options)
                             .OrderBy(file => file);
@@ -186,10 +183,8 @@ namespace AspNetCoreWebBundler
                         var ext = Path.GetExtension(Dest);
 
                         var files = Directory.EnumerateFiles(fullPath, "*" + ext, SearchOption.TopDirectoryOnly)
-                            .Select(file => file
-                                .Replace(folder + Path.DirectorySeparatorChar, "")
-                                .Replace("\\", "/")
-                        );
+                            .Select(file => file.Replace(folder + Path.DirectorySeparatorChar, "").Replace("\\", "/"))
+                            .OrderBy(file => file);
 
                         foreach (var file in files)
                         {

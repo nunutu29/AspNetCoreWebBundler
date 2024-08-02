@@ -38,12 +38,13 @@ namespace AspNetCoreWebBundler
             _processor = new BundleProcessor();
             _processor.Processing += (s, e) =>
             {
-                _logger.LogDebug("Processing " + e.Bundle.AbsoluteOutputFile);
+                _logger.LogDebug("Processing " + e.Bundle.Dest);
+
                 FileHelper.RemoveReadonly(e.Bundle.AbsoluteOutputFile);
             };
             _processor.AfterBundling += (s, e) =>
             {
-                _logger.LogDebug("Bundled " + e.Bundle.AbsoluteOutputFile);
+                _logger.LogInformation("Bundled " + e.Bundle.Dest);
             };
             _processor.BeforeWritingMinFile += (s, e) =>
             {
@@ -51,7 +52,7 @@ namespace AspNetCoreWebBundler
             };
             _processor.AfterWritingMinFile += (s, e) =>
             {
-                _logger.LogDebug("Minified " + e.ResultFile);
+                _logger.LogInformation("Minified " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
             _processor.ErrorMinifyingFile += (s, e) =>
             {
@@ -71,7 +72,7 @@ namespace AspNetCoreWebBundler
             };
             _processor.AfterWritingGzipFile += (s, e) =>
             {
-                _logger.LogDebug("GZipped " + e.ResultFile);
+                _logger.LogInformation("GZipped " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
             _processor.BeforeWritingSourceMap += (s, e) =>
             {
@@ -79,11 +80,11 @@ namespace AspNetCoreWebBundler
             };
             _processor.AfterWritingSourceMap += (s, e) =>
             {
-                _logger.LogDebug("SourceMap " + e.ResultFile);
+                _logger.LogInformation("SourceMap " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
             _processor.MinificationSkipped += (s, e) =>
             {
-                _logger.LogDebug("No changes, skipping minification of " + e.Bundle.AbsoluteOutputFile);
+                _logger.LogDebug("No changes, skipping minification of " + e.Bundle.Dest);
             };
             
             _listeners = new ConcurrentDictionary<string, FileSystemWatcher>();
@@ -116,7 +117,7 @@ namespace AspNetCoreWebBundler
                         
                         _listeners.TryAdd(projectRoot, fsw);
 
-                        _logger.LogDebug("Watching: {projectRoot}", projectRoot);
+                        _logger.LogInformation("Watching: {projectRoot}", projectRoot);
 
                         started = true;
                     }

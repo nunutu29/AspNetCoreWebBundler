@@ -38,22 +38,18 @@ namespace AspNetCoreWebBundler
                 logger.LogDebug($"Processing {e.Bundle.Dest}");
                 FileHelper.RemoveReadonly(e.Bundle.AbsoluteOutputFile);
             };
-
             processor.AfterBundling += (sender, e) =>
             {
-                logger.LogDebug("Bundled " + e.Bundle.AbsoluteOutputFile);
+                logger.LogInformation("Bundled " + e.Bundle.Dest);
             };
-
             processor.BeforeWritingMinFile += (s, e) =>
             {
                 FileHelper.RemoveReadonly(e.ResultFile);
             };
-
             processor.AfterWritingMinFile += (sender, e) =>
             {
-                logger.LogDebug("Minified " + e.ResultFile);
+                logger.LogInformation("Minified " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
-
             processor.ErrorMinifyingFile += (sender, e) =>
             {
                 if (e.Result == null || !e.Result.HasErrors)
@@ -68,30 +64,25 @@ namespace AspNetCoreWebBundler
                     logger.LogError(error);
                 }
             };
-
             processor.BeforeWritingGzipFile += (s, e) =>
             {
                 FileHelper.RemoveReadonly(e.ResultFile);
             };
-
             processor.AfterWritingGzipFile += (s, e) =>
             {
-                logger.LogDebug("GZipped " + e.ResultFile);
+                logger.LogInformation("GZipped " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
-
             processor.BeforeWritingSourceMap += (s, e) =>
             {
                 FileHelper.RemoveReadonly(e.ResultFile);
             };
-
             processor.AfterWritingSourceMap += (sender, e) =>
             {
-                logger.LogDebug("SourceMap " + e.ResultFile);
+                logger.LogInformation("SourceMap " + PathHelper.MakeRelative(e.Bundle.ConfigFile, e.ResultFile));
             };
-
             processor.MinificationSkipped += (s, e) =>
             {
-                logger.LogDebug("No changes, skipping minification of " + e.Bundle.AbsoluteOutputFile);
+                logger.LogDebug("No changes, skipping minification of " + e.Bundle.Dest);
             };
 
             processor.Process(configFile.FullName);

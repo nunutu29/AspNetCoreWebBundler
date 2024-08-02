@@ -147,5 +147,8 @@ To disable the bundling/minification process, you can include the following prop
 </PropertyGroup>
 ```
 
+# TODO
+- More tests
+
 # License
 [Apache 2.0](LICENSE)

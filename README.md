@@ -1,4 +1,4 @@
-# ASP.NET Core Web Bundler
+# ASP.NET Core Web Bundler (Preview)
 
 A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build time and runtime during development.
 
@@ -9,7 +9,7 @@ A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build
 - Automatically bundle files during `Debug` mode. Check [here](#development).
 
 # Setup
-Add the NuGet package.
+Add the NuGet package to your project.
 
 Since this package is primarily required at compilation time, set PrivateAssets="All" in the package reference. This ensures that the package does not get included in the output during the publishing process, keeping the bin folder clean.
 

@@ -2,6 +2,10 @@
 
 A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build time and runtime during development.
 
+[![build](https://github.com/nunutu29/AspNetCoreWebBundler/actions/workflows/build.yml/badge.svg)](https://github.com/nunutu29/AspNetCoreWebBundler/actions/workflows/build.yml)
+[![NuGet Version](https://img.shields.io/nuget/v/AspNetCoreWebBundler)](https://www.nuget.org/packages/AspNetCoreWebBundler/)
+
+
 # Features
 - Combine CSS, JavaScript, and HTML files into one or more output files.
 - Minify one or multiple files into one or more output files.

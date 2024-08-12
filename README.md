@@ -151,6 +151,15 @@ To disable the bundling/minification process, you can include the following prop
 </PropertyGroup>
 ```
 
+# DesignTimeBuild
+By default the Bundler is disabled on DesignTimeBuild. To enable it include the following property in your .csproj file:
+
+```xml
+<PropertyGroup>
+  <EnableAspNetCoreWebBundlerDesignTimeBuild>true</EnableAspNetCoreWebBundlerDesignTimeBuild>
+</PropertyGroup>
+```
+
 # TODO
 - More tests
 

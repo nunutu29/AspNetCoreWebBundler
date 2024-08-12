@@ -11,7 +11,7 @@ namespace AspNetCoreWebBundler
     /// <summary>
     ///  An MSBuild task for creating runtime settins during DEBUG.
     /// </summary>
-    public class RuntimeWebBundlerSettingsTask : Task
+    public class RuntimeWebBundlerSettingsBuildTask : Task
     {
         private static readonly Lazy<Regex> ProjectLine = new Lazy<Regex>(() => new Regex(
             "^" // Beginning of line

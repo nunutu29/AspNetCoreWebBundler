@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
+  
   <PropertyGroup>
-    <EnableAspNetCoreWebBundler>true</EnableAspNetCoreWebBundler>
+    <!-- Enabled by default -->
+    <EnableAspNetCoreWebBundler>True</EnableAspNetCoreWebBundler>
+
+    <!-- False by default: means that on "DesignTimeBuild" the bundler will be disabled -->
+    <EnableAspNetCoreWebBundlerDesignTimeBuild>False</EnableAspNetCoreWebBundlerDesignTimeBuild>
   </PropertyGroup>
 
 </Project>

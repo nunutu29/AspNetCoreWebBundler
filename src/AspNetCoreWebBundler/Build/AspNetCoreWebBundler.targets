@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
   <PropertyGroup>
     <_AspNetCoreWebBundlerTaskAssembly>..\tools\netstandard2.0\AspNetCoreWebBundler.dll</_AspNetCoreWebBundlerTaskAssembly>
     <_RuntimeWebBundlerSettingsFile>$(IntermediateOutputPath)$(MSBuildProjectName).RuntimeWebBundlerSettings.generated.cs</_RuntimeWebBundlerSettingsFile>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.WebBundlerBuildTask"/>
+  <!-- Core reference targets -->
+  <Target Name="_AspNetCoreWebBundlerBeforeClean" AfterTargets="CoreClean" />
+  <Target Name="_AspNetCoreWebBundlerBeforeBuild" AfterTargets="CompileTypeScriptWithTSConfig" BeforeTargets="BeforeCompile">
+
+    <PropertyGroup Condition=" '$(EnableAspNetCoreWebBundlerDesignTimeBuild)' == 'False' and ('$(DesignTimeBuild)' == 'true' or '$(BuildingProject)' != 'true') ">
+      <!-- This will be empty during a normal build -->
+      <_SkipAspNetCoreWebBundler>True</_SkipAspNetCoreWebBundler>
+    </PropertyGroup>
+    
+  </Target>
+
   <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.WebBundlerCleanTask"/>
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.WebBundlerBuildTask"/>
   <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.RuntimeWebBundlerSettingsCleanTask"/>
-  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.RuntimeWebBundlerSettingsTask"/>
+  <UsingTask AssemblyFile="$(_AspNetCoreWebBundlerTaskAssembly)" TaskName="AspNetCoreWebBundler.RuntimeWebBundlerSettingsBuildTask"/>
 
    <!-- clean the bundles -->
-  <Target Name="AspNetCoreWebBundlerClean" AfterTargets="CoreClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True'">
+  <Target Name="AspNetCoreWebBundlerClean" AfterTargets="_AspNetCoreWebBundlerBeforeClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True'">
     <AspNetCoreWebBundler.WebBundlerCleanTask ConfigurationFile="$(MSBuildProjectDirectory)\AspNetCoreWebBundler.json" />
   </Target>
 
   <!-- build the bundles -->
-  <Target Name="AspNetCoreWebBundlerBuild" AfterTargets="CompileTypeScriptWithTSConfig" BeforeTargets="BeforeCompile" Condition="'$(EnableAspNetCoreWebBundler)' == 'True'">
+  <Target Name="AspNetCoreWebBundlerBuild" AfterTargets="_AspNetCoreWebBundlerBeforeBuild" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(_SkipAspNetCoreWebBundler)' != 'True'">
     <AspNetCoreWebBundler.WebBundlerBuildTask ConfigurationFile="$(MSBuildProjectDirectory)\AspNetCoreWebBundler.json" />
   </Target>
 
-
   <!-- clean the runtime settings -->
-  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettingsClean" AfterTargets="CoreClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' ">
+  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettingsClean" AfterTargets="_AspNetCoreWebBundlerBeforeClean" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' ">
     <AspNetCoreWebBundler.RuntimeWebBundlerSettingsCleanTask OutputFile="$(_RuntimeWebBundlerSettingsFile)" />
   </Target>
 
   <!-- build the runtime settings -->
-  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettings" BeforeTargets="BeforeCompile" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' ">
-    <AspNetCoreWebBundler.RuntimeWebBundlerSettingsTask OutputFile="$(_RuntimeWebBundlerSettingsFile)" SolutionPath="$(SolutionPath)" />
+  <Target Name="AspNetCoreWebBundlerRuntimeBundlerSettingsBuild" AfterTargets="_AspNetCoreWebBundlerBeforeBuild" Condition="'$(EnableAspNetCoreWebBundler)' == 'True' and '$(Configuration)' == 'Debug' and '$(_SkipAspNetCoreWebBundler)' != 'True'">
+    <AspNetCoreWebBundler.RuntimeWebBundlerSettingsBuildTask OutputFile="$(_RuntimeWebBundlerSettingsFile)" SolutionPath="$(SolutionPath)" />
     <ItemGroup>
       <Compile Include="$(_RuntimeWebBundlerSettingsFile)" />
     </ItemGroup>

@@ -1,4 +1,4 @@
-# ASP.NET Core Web Bundler (Preview)
+# ASP.NET Core Web Bundler
 
 A NuGet Package for CSS, JavaScript, and HTML bundling and minification at build time and runtime during development.
 
